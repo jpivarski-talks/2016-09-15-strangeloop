@@ -83,8 +83,103 @@
 %  \tableofcontents
 %\end{frame}
 
-\begin{frame}{Introduction}
+\begin{frame}{Tale of two cities}
+\vspace{0.2 cm}
+\begin{columns}
+\column{0.5\linewidth}
+\begin{center}
+\textcolor{darkblue}{\Large \underline{Statistical Computing}}
 
+\vspace{0.25 cm}
+\includegraphics[height=3.5 cm]{statistical-software.png}
+\end{center}
+
+\begin{onlyenv}<2->
+\begin{itemize}
+\item Often natively compiled, driven by high-level languages.
+\item Primary customer is the laptop data analysis.
+\end{itemize}
+\end{onlyenv}
+
+\column{0.5\linewidth}
+\begin{center}
+\textcolor{darkblue}{\Large \underline{Big Data}}
+
+\vspace{0.25 cm}
+\includegraphics[height=3.5 cm]{bigdata-software.png}
+\end{center}
+
+\begin{onlyenv}<2->
+\begin{itemize}
+\item Usually Java/Spark/Clojure.
+\item More emphasis on scale-out than single-processor speed.
+\item Datasets assumed to be {\it big.}
+\end{itemize}
+\end{onlyenv}
+
+\end{columns}
 \end{frame}
+
+\begin{frame}{A third you may not have heard about}
+\vspace{0.5 cm}
+\begin{center}
+\textcolor{darkblue}{\Large \underline{High Energy Physics (HEP)}}
+
+\vspace{0.25 cm}
+\includegraphics[height=6 cm]{hep-software.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{A third you may not have heard about}
+\vspace{0.25 cm}
+\begin{columns}
+\column{0.5\linewidth}
+\begin{center}
+\textcolor{darkblue}{\Large \underline{High Energy Physics (HEP)}}
+
+\vspace{0.25 cm}
+\includegraphics[height=6 cm]{hep-software.png}
+\end{center}
+
+\column{0.5\linewidth}
+\begin{itemize}
+\item Natively compiled, optimized for single-processor throughput.
+\item<2-> {\it Throughput,} not speed, this is not High Performance Computing (HPC).
+\item<3-> Datasets have always been ``big'' 
+\begin{itemize}
+\item<4-> SPS in 1980's: $\sim$100~GB per year
+% https://www.researchgate.net/publication/275209564_UA1_Data-acquisition_System 1.6 MB/event? (``raw'')
+% https://cern.ch/delfino/Generic%20LHC%20Computing%202000.ppt 0.1 MB/event (probably after processing)
+% http://cerncourier.com/cws/article/cern/28849
+\item<5-> LHC today: $\sim$25~PB per year
+% http://www.lhc-closer.es/taking_a_closer_look_at_lhc/0.lhc_data_analysis
+% https://home.cern/about/updates/2013/02/cern-data-centre-passes-100-petabytes
+\end{itemize}
+\end{itemize}
+
+\vspace{0.2 cm}
+\hfill \only<6>{\includegraphics[width=0.87\linewidth]{tapes1.png}}\only<7>{\includegraphics[width=0.87\linewidth]{cerncomputing.png}}
+\vspace{-0.2 cm}
+\end{columns}
+\end{frame}
+
+%% \begin{frame}{A third you may not have heard about}
+%% \vspace{0.5 cm}
+%% \begin{columns}
+%% \column{0.5\linewdith}
+%% \begin{center}
+%% \textcolor{darkblue}{\Large \underline{High Energy Physics (HEP)}}
+
+%% \vspace{0.25 cm}
+%% \includegraphics[height=6 cm]{hep-software.png}
+%% \end{center}
+
+%% \column{0.5\linewdith}
+%% \begin{itemize}
+%% \item 
+%% \end{itemize}
+%% \end{columns}
+%% \end{frame}
+
 
 \end{document}
