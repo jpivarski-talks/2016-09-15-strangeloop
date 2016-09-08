@@ -257,16 +257,208 @@ versatile reducers for big data.
 \end{frame}
 
 \begin{frame}{Statistical definition of a histogram}
+\vspace{0.75 cm}
+A {\bf histogram} is an approximation of a distribution, formed by partitioning a sample by a feature and counting how many items fall in each partition.
 
-
+\vspace{0.25 cm}
+The partitions are called {\bf bins}, and the content of each bin may be represented as the total count or the average density in that partition. [Start philosophical argument here.]
 
 \begin{center}
 \only<1>{\includegraphics[width=0.7\linewidth]{Iris_Petal_Length_Histogram.pdf}}
 \only<2>{\includegraphics[width=0.7\linewidth]{Iris_Petal_Length_Histogram-2.pdf}}
 \end{center}
-
 \end{frame}
 
+\begin{frame}[fragile]{Gallery of histogram APIs}
+\vspace{0.25 cm}
+\begin{columns}
+\column{0.50\linewidth}
+\begin{description}
+\item[R:]
+
+\begin{lstlisting}
+hist(x, breaks =
+   "Sturges", ...)
+\end{lstlisting}
+
+{\tt x} input data samples \\
+{\tt breaks} binning strategy
+
+\item[Numpy:]
+
+\begin{lstlisting}
+numpy.histogram(a, bins = 10, ...)
+\end{lstlisting}
+
+{\tt a} input data samples \\
+{\tt bins} binning strategy
+
+\item[Pandas:]
+
+\begin{lstlisting}
+DataFrame.hist(data, bins = 10, ...)
+\end{lstlisting}
+
+{\tt data} input data samples \\
+{\tt bins} binning strategy
+\end{description}
+
+\column{0.51\linewidth}
+\begin{description}
+\item[Spark:]
+
+\begin{lstlisting}
+DoubleRDDFunctions.histogram(buckets: Array[Double])
+\end{lstlisting}
+
+{\tt this} input data samples \\
+{\tt buckets} binning strategy
+
+\item[Mathematica:]
+
+\begin{lstlisting}
+Histogram[data, hspec]
+\end{lstlisting}
+
+{\tt data} input data samples \\
+{\tt hspec} binning strategy
+
+\item[MATLAB:]
+
+\begin{lstlisting}
+histogram(X, nbins)
+\end{lstlisting}
+
+{\tt X} input data samples \\
+{\tt nbins} binning strategy
+
+\end{description}
+\end{columns}
+
+\begin{uncoverenv}<2->
+\vspace{-5 cm}
+\begin{center}
+\fcolorbox{black}{white}{\begin{minipage}{0.8\linewidth}
+\vspace{0.75 cm}
+\centering They all require input data before giving you a histogram.
+\vspace{0.75 cm}
+\end{minipage}}
+\end{center}
+\vspace{5 cm}
+\end{uncoverenv}
+\end{frame}
+
+\begin{frame}[fragile]{HEP histograms are different}
+HEP software (HBOOK, PAW, ROOT, HippoDraw, AIDA, \ldots) treats histograms as {\it fillable containers.}
+
+\begin{center}
+\fbox{\begin{minipage}{0.6\linewidth}
+\vspace{0.3 cm}
+\begin{onlyenv}<1>
+\vspace{0.5\baselineskip}
+\hfill \begin{minipage}{0.9\linewidth}
+\ttfamily\small
+h = Histogram(numBins, \\
+\mbox{\hspace{1.5 cm}}lowEdge, highEdge) \\
+\\
+for x in data: \\
+\mbox{\hspace{0.75 cm}}h.fill(x) \\
+\\
+h.plot()
+\end{minipage}
+\vspace{0.5\baselineskip}
+\end{onlyenv}
+\begin{onlyenv}<2->
+\hfill \begin{minipage}{0.9\linewidth}
+\ttfamily\small
+h = Histogram("pt", numBins, \\
+\mbox{\hspace{1.5 cm}}lowEdge, highEdge) \\
+\\
+for mu in muons: \\
+\mbox{\hspace{0.75 cm}}pt = sqrt(mu.px**2 + mu.py**2) \\
+\mbox{\hspace{0.75 cm}}h.fill(pt) \\
+\\
+h.plot()
+\end{minipage}
+\end{onlyenv}
+\vspace{0.3 cm}
+\end{minipage}}
+\end{center}
+
+\uncover<3->{This interface lets you provide the data gradually and view partial results. \\ It presumes the dataset is too big for one function call.}
+\vspace{-0.5 cm}
+\end{frame}
+
+\begin{frame}{Everything is made out of histograms}
+\vspace{0.5 cm}
+\mbox{\hspace{-1.1 cm}
+\includegraphics[height=1.8cm]{dileptons_fig_01b_mumu.png}
+\includegraphics[height=1.8cm]{efficiency.png}
+\includegraphics[height=1.8cm]{profile_plot.png}
+\includegraphics[height=1.8cm]{efficiency_2d.png}
+\includegraphics[height=1.8cm]{histograms_of_histograms.png}
+\includegraphics[height=1.8cm]{lego_plot.png}
+\includegraphics[height=1.8cm]{two_dimensional.png}}
+
+\vspace{0.5 cm}
+\begin{center}
+\begin{minipage}{0.9\linewidth}
+\Large Histograms have become the basic unit of HEP data analysis, used to make almost everything else. Analogous to
+
+\vspace{0.5 cm}
+\hspace{0.5 cm}\begin{minipage}{0.5\linewidth}
+\begin{itemize}
+\item lists in LISP
+\item dictionaries in Python
+\item data.frames in R
+\end{itemize}
+\end{minipage}
+\end{minipage}
+\end{center}
+\end{frame}
+
+\begin{frame}{Examples}
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.33\linewidth}
+\mbox{ } \hfill \hfill \hfill \textcolor{darkblue}{Stacked histograms} \hfill \mbox{ }
+
+\includegraphics[height=3.5 cm]{dileptons_fig_01b_mumu.png}
+
+\vspace{0.5 cm}
+
+Represents contributions from different samples to a total histogram.
+
+\vspace{0.25 cm}
+\begin{minipage}{\linewidth}
+\scriptsize Constructed by cumulatively filling a series of histograms and overlaying them in reverse order.
+\end{minipage}
+
+\column{0.33\linewidth}
+\mbox{ } \hfill \hfill \textcolor{darkblue}{Efficiency plot} \hfill \mbox{ }
+
+\mbox{ } \hfill \includegraphics[height=3.5 cm]{efficiency.png} \hfill \mbox{ }
+
+Represents the probability of passing a filter versus some variable.
+
+\vspace{0.25 cm}
+\begin{minipage}{\linewidth}
+\scriptsize Constructed by filling two histograms, one with the filter, the other without, and dividing them bin-by-bin.
+\end{minipage}
+
+\column{0.33\linewidth}
+\mbox{ } \hfill \textcolor{darkblue}{Profile plot} \hfill \mbox{ }
+
+\mbox{\hspace{-0.25 cm}}\includegraphics[height=3.5 cm]{profile_plot.png}
+
+Represents a marginal projection of the dataset with errors on the mean.
+
+\vspace{0.25 cm}
+\begin{minipage}{\linewidth}
+\scriptsize Constructed by filling $\sum_i y_i$ and $\sum_i {y_i}^2$ separately and doing the appropriate transformations bin-by-bin.
+\end{minipage}
+\end{columns}
+\end{frame}
 
 
 \end{document}
