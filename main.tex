@@ -23,6 +23,8 @@
 \usepackage{tikz}
 \usepackage{listings}
 \usepackage{courier}
+\usepackage{bold-extra}
+\usepackage{minted}
 
 \xdefinecolor{darkblue}{rgb}{0.1,0.1,0.7}
 \xdefinecolor{dianablue}{rgb}{0.18,0.24,0.31}
@@ -475,6 +477,193 @@ $\left.\mbox{\rotatebox{90}{\hspace{-0.5 cm}merging}}\hspace{0.1 cm}\right\{\beg
 \end{minipage}
 \end{center}
 \end{frame}
+
+\begin{frame}[fragile]{Specifically, in Spark\ldots}
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.5\linewidth}
+
+\textcolor{darkblue}{Imperative analysis script}
+\begin{lstlisting}
+x = Histogram(100, -5.0, 5.0)
+
+for event in events:
+    x.fill(event.calcX())
+
+x.plot()
+\end{lstlisting}
+
+\column{0.52\linewidth}
+\textcolor{darkblue}{Spark equivalent}
+\begin{lstlisting}
+x = events.aggregate(
+    Histogram(100, -5.0, 5.0),
+    lambda h, event:
+        h.fill(event.calcX()),
+    lambda h1, h2:
+        h1 + h2)
+
+x.plot()
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Specifically, in Spark\ldots}
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.5\linewidth}
+
+\textcolor{darkblue}{Imperative analysis script}
+\begin{lstlisting}
+x = Histogram(100, -5.0, 5.0)
+y = Histogram(100, -5.0, 5.0)
+
+for event in events:
+    x.fill(event.calcX())
+    y.fill(event.calcY())
+
+x.plot()
+y.plot()
+\end{lstlisting}
+
+\column{0.52\linewidth}
+\textcolor{darkblue}{Spark equivalent}
+\begin{lstlisting}
+x, y = events.aggregate(
+    (Histogram(100, -5.0, 5.0),
+     Histogram(100, -5.0, 5.0)),
+    lambda h, event: (
+        h[0].fill(event.calcX()),
+        h[1].fill(event.calcY())),
+    lambda h1, h2: (
+        h1[0] + h2[0],
+        h1[1] + h2[1]))
+
+x.plot()
+y.plot()
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Specifically, in Spark\ldots}
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.5\linewidth}
+
+\textcolor{darkblue}{Imperative analysis script}
+\begin{lstlisting}
+x = Histogram(100, -5.0, 5.0)
+y = Histogram(100, -5.0, 5.0)
+z = Histogram(100, -5.0, 5.0)
+
+for event in events:
+    x.fill(event.calcX())
+    y.fill(event.calcY())
+    z.fill(event.calcZ())
+
+x.plot()
+y.plot()
+z.plot()
+\end{lstlisting}
+
+\column{0.52\linewidth}
+\textcolor{darkblue}{Spark equivalent}
+\begin{lstlisting}
+x, y, z = events.aggregate(
+    (Histogram(100, -5.0, 5.0),
+     Histogram(100, -5.0, 5.0),
+     Histogram(100, -5.0, 5.0)),
+    lambda h, event: (
+        h[0].fill(event.calcX()),
+        h[1].fill(event.calcY()),
+        h[2].fill(event.calcZ())),
+    lambda h1, h2: (
+        h1[0] + h2[0],
+        h1[1] + h2[1],
+        h1[2] + h2[2]))
+
+x.plot()
+y.plot()
+z.plot()
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Solution: go functional}
+\vspace{0.5 cm}
+\begin{center}
+\fbox{\begin{minipage}{0.85\linewidth}
+\vspace{0.25 cm}
+\ttfamily\small\hspace{0.25 cm} h = Histogram(numBins, lowEdge, highEdge, \textbf{fillRule})
+\vspace{0.25 cm}
+\end{minipage}}
+\end{center}
+
+where {\ttfamily\small\textbf{fillRule}} is a function : {\it data} $\to$ $\mathbb{R}$ that specifies how to get the binnable feature from the input dataset.
+
+\begin{uncoverenv}<2->
+\vspace{0.5 cm}
+All domain domain-specific knowledge is in the {\ttfamily\small\textbf{fillRule}}. The filling function may now be generic (and automated).
+
+\begin{center}
+\fbox{\begin{minipage}{0.85\linewidth}
+\vspace{0.25 cm}
+\ttfamily\small\hspace{0.25 cm} h.fill(datum) \hspace{1 cm}\# calls fillRule(datum) internally
+\vspace{0.25 cm}
+\end{minipage}}
+\end{center}
+\end{uncoverenv}
+
+\begin{uncoverenv}<3->
+\vspace{0.5 cm}
+(In a {\it purely} functional environment, {\ttfamily\small hnew = hold.filled(datum)}.)
+\end{uncoverenv}
+\end{frame}
+
+\begin{frame}{What this looks like in Spark}
+\begin{columns}
+\column{0.46\linewidth}
+%% \begin{lstlisting}
+%% def increment(h, event):
+%%     h.fill(event)
+%%     return h
+
+%% def combine(h1, h2):
+%%     return h1 + h2
+
+%% x = events.aggregate(
+%%     Histogram(100, -5.0, 5.0,
+%%        lambda ev: ev.calcX()),
+%%     increment,
+%%     combine)
+
+%% x.plot()
+%% \end{lstlisting}
+
+\column{0.59\linewidth}
+\begin{minted}{python}
+class Package:
+  def __init__(self, **hs):
+      self.hs = hs
+  def fill(self, datum):
+      for h in self.hs.values():
+          h.fill(datum)
+  def __add__(self, other):
+      return {self.hs[n] + other.hs[n]
+                  for n in self.hs}
+
+package = events.aggregate(Package(
+        x = Histogram(100, -5.0, 5.0,
+                lambda ev: ev.calcX()),
+        y = Histogram(100, -5.0, 5.0,
+                lambda ev: ev.calcY()))
+    increment, combine)
+
+package.hs["x"].plot()
+\end{minted}
+\end{columns}
+\end{frame}
+
 
 
 \end{document}
