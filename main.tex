@@ -194,13 +194,13 @@ the problems viewed as unique.
 \end{frame}
 
 \begin{frame}{}
-\vspace{0.5 cm}
+\vspace{1 cm}
 \begin{center}
 \large Considering how much has been developed on both sides of the divide, \\ small ``glue projects'' connecting them can yield a huge benefit.
 \end{center}
 
-\vspace{0.5 cm}
-\includegraphics[width=\linewidth]{great_lakes_levels.pdf}
+\vspace{1 cm}
+\mbox{\hspace{-1.2 cm}}\includegraphics[width=1.16\linewidth]{great_lakes_levels.pdf}
 \vspace{-1 cm}
 \end{frame}
 
@@ -215,7 +215,7 @@ the problems viewed as unique.
 \includegraphics[height=1.5 cm]{stamp_replace.png}
 \end{center}
 
-Wider community has more resources for
+Wider community has better resources for
 \begin{itemize}
 \item maintaining code
 \item catching bugs
@@ -258,10 +258,10 @@ versatile reducers for big data.
 
 \begin{frame}{Statistical definition of a histogram}
 \vspace{0.75 cm}
-A {\bf histogram} is an approximation of a distribution, formed by partitioning a sample by a feature and counting how many items fall in each partition.
+A {\bf histogram} is an approximation of a distribution, formed by partitioning a sample by one of its features and counting how many items fall in each partition.
 
 \vspace{0.25 cm}
-The partitions are called {\bf bins}, and the content of each bin may be represented as the total count or the average density in that partition. [Start philosophical argument here.]
+The partitions are called {\bf bins}, and the content of each bin may be represented as the total count or the average density in that partition. \textcolor{gray}{[Start philosophical argument here.]}
 
 \begin{center}
 \only<1>{\includegraphics[width=0.7\linewidth]{Iris_Petal_Length_Histogram.pdf}}
@@ -269,7 +269,7 @@ The partitions are called {\bf bins}, and the content of each bin may be represe
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Gallery of histogram APIs}
+\begin{frame}[fragile]{Gallery of histogram APIs: non-HEP}
 \vspace{0.25 cm}
 \begin{columns}
 \column{0.50\linewidth}
@@ -340,7 +340,7 @@ histogram(X, nbins)
 \begin{center}
 \fcolorbox{black}{white}{\begin{minipage}{0.8\linewidth}
 \vspace{0.75 cm}
-\centering They all require input data before giving you a histogram.
+\centering They all require input data before giving you the histogram.
 \vspace{0.75 cm}
 \end{minipage}}
 \end{center}
@@ -371,8 +371,8 @@ h.plot()
 \begin{onlyenv}<2->
 \hfill \begin{minipage}{0.9\linewidth}
 \ttfamily\small
-h = Histogram("pt", numBins, \\
-\mbox{\hspace{1.5 cm}}lowEdge, highEdge) \\
+h = Histogram(numBins, \\
+\mbox{\hspace{1.5 cm}}lowEdge, highEdge, "pt") \\
 \\
 for mu in muons: \\
 \mbox{\hspace{0.75 cm}}pt = sqrt(mu.px**2 + mu.py**2) \\
@@ -385,7 +385,7 @@ h.plot()
 \end{minipage}}
 \end{center}
 
-\uncover<3->{This interface lets you provide the data gradually and view partial results. \\ It presumes the dataset is too big for one function call.}
+\uncover<3->{This interface lets you feed in the data gradually and view partial results. \\ It presumes the dataset is too big for a single function call.}
 \vspace{-0.5 cm}
 \end{frame}
 
@@ -456,6 +456,24 @@ Represents a marginal projection of the dataset with errors on the mean.
 \scriptsize Constructed by filling $\sum_i y_i$ and $\sum_i {y_i}^2$ separately and doing the appropriate transformations bin-by-bin.
 \end{minipage}
 \end{columns}
+\end{frame}
+
+\begin{frame}{The problem with this API}
+\vspace{0.65 cm}
+\textcolor{darkblue}{Domain-specific knowledge enters in two different places: histogram-construction and histogram-filling.}
+
+\begin{center}
+\begin{minipage}{0.8\linewidth}
+\vspace{0.25 cm}
+$\left.\mbox{\rotatebox{90}{\hspace{-0.9 cm}construction}\hspace{0.15 cm}}\right\{\begin{array}{l}\mbox{\ttfamily\small job[N].h = Histogram(numBins, lowEdge, highEdge)} \\ \hspace{2.3 cm}\mbox{\textcolor{darkblue}{\# binning requires knowledge of the problem domain}}\end{array}$
+
+\vspace{0.25 cm}
+$\left.\mbox{\rotatebox{90}{\hspace{-0.65 cm}\hspace{0.35 cm}filling\hspace{0.35 cm}}}\hspace{0.1 cm}\right\{\begin{array}{l}\mbox{\ttfamily\small for event in job[N].physicsEvents:} \\ \mbox{\ttfamily\small \hspace{0.75 cm}job[N].h.fill(event.whatToPlot())} \\ \hspace{2.3 cm}\mbox{\textcolor{darkblue}{\# {\ttfamily\small whatToPlot()} requires knowledge of the problem domain}}\end{array}$
+
+\vspace{0.25 cm}
+$\left.\mbox{\rotatebox{90}{\hspace{-0.5 cm}merging}}\hspace{0.1 cm}\right\{\begin{array}{l}\mbox{\ttfamily\small h = job[0].h + job[1].h + job[2].h + ...}\end{array}$
+\end{minipage}
+\end{center}
 \end{frame}
 
 
