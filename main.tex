@@ -484,18 +484,20 @@ $\left.\mbox{\rotatebox{90}{\hspace{-0.5 cm}merging}}\hspace{0.1 cm}\right\{\beg
 \column{0.5\linewidth}
 
 \textcolor{darkblue}{Imperative analysis script}
-\begin{lstlisting}
+\small
+\begin{minted}{python}
 x = Histogram(100, -5.0, 5.0)
 
 for event in events:
     x.fill(event.calcX())
 
 x.plot()
-\end{lstlisting}
+\end{minted}
 
 \column{0.52\linewidth}
 \textcolor{darkblue}{Spark equivalent}
-\begin{lstlisting}
+\small
+\begin{minted}{python}
 x = events.aggregate(
     Histogram(100, -5.0, 5.0),
     lambda h, event:
@@ -504,7 +506,7 @@ x = events.aggregate(
         h1 + h2)
 
 x.plot()
-\end{lstlisting}
+\end{minted}
 \end{columns}
 \end{frame}
 
@@ -514,7 +516,8 @@ x.plot()
 \column{0.5\linewidth}
 
 \textcolor{darkblue}{Imperative analysis script}
-\begin{lstlisting}
+\small
+\begin{minted}{python}
 x = Histogram(100, -5.0, 5.0)
 y = Histogram(100, -5.0, 5.0)
 
@@ -524,11 +527,12 @@ for event in events:
 
 x.plot()
 y.plot()
-\end{lstlisting}
+\end{minted}
 
 \column{0.52\linewidth}
 \textcolor{darkblue}{Spark equivalent}
-\begin{lstlisting}
+\small
+\begin{minted}{python}
 x, y = events.aggregate(
     (Histogram(100, -5.0, 5.0),
      Histogram(100, -5.0, 5.0)),
@@ -541,7 +545,7 @@ x, y = events.aggregate(
 
 x.plot()
 y.plot()
-\end{lstlisting}
+\end{minted}
 \end{columns}
 \end{frame}
 
@@ -551,7 +555,8 @@ y.plot()
 \column{0.5\linewidth}
 
 \textcolor{darkblue}{Imperative analysis script}
-\begin{lstlisting}
+\small
+\begin{minted}{python}
 x = Histogram(100, -5.0, 5.0)
 y = Histogram(100, -5.0, 5.0)
 z = Histogram(100, -5.0, 5.0)
@@ -564,11 +569,12 @@ for event in events:
 x.plot()
 y.plot()
 z.plot()
-\end{lstlisting}
+\end{minted}
 
 \column{0.52\linewidth}
 \textcolor{darkblue}{Spark equivalent}
-\begin{lstlisting}
+\small
+\begin{minted}{python}
 x, y, z = events.aggregate(
     (Histogram(100, -5.0, 5.0),
      Histogram(100, -5.0, 5.0),
@@ -585,7 +591,7 @@ x, y, z = events.aggregate(
 x.plot()
 y.plot()
 z.plot()
-\end{lstlisting}
+\end{minted}
 \end{columns}
 \end{frame}
 
@@ -608,7 +614,7 @@ All domain domain-specific knowledge is in the {\ttfamily\small\textbf{fillRule}
 \begin{center}
 \fbox{\begin{minipage}{0.85\linewidth}
 \vspace{0.25 cm}
-\ttfamily\small\hspace{0.25 cm} h.fill(datum) \hspace{1 cm}\# calls fillRule(datum) internally
+\ttfamily\small\hspace{0.25 cm} h.fill(datum) \hspace{1 cm}\textcolor{gray}{\textit{\# calls fillRule(datum) internally}}
 \vspace{0.25 cm}
 \end{minipage}}
 \end{center}
@@ -623,24 +629,26 @@ All domain domain-specific knowledge is in the {\ttfamily\small\textbf{fillRule}
 \begin{frame}[fragile]{What this looks like in Spark}
 \begin{columns}
 \column{0.46\linewidth}
-%% \begin{lstlisting}
-%% def increment(h, event):
-%%     h.fill(event)
-%%     return h
+\small
+\begin{minted}{python}
+def increment(h, event):
+    h.fill(event)
+    return h
 
-%% def combine(h1, h2):
-%%     return h1 + h2
+def combine(h1, h2):
+    return h1 + h2
 
-%% x = events.aggregate(
-%%     Histogram(100, -5.0, 5.0,
-%%        lambda ev: ev.calcX()),
-%%     increment,
-%%     combine)
+x = events.aggregate(
+    Histogram(100, -5.0, 5.0,
+       lambda ev: ev.calcX()),
+    increment,
+    combine)
 
-%% x.plot()
-%% \end{lstlisting}
+x.plot()
+\end{minted}
 
 \column{0.59\linewidth}
+\begin{uncoverenv}<2->
 \small
 \begin{minted}{python}
 class Package:
@@ -650,8 +658,8 @@ class Package:
       for h in self.hs.values():
           h.fill(datum)
   def __add__(self, other):
-      return {self.hs[n] + other.hs[n]
-                  for n in self.hs}
+      return {n: self.hs[n] + other.hs[n]
+                        for n in self.hs}
 
 package = events.aggregate(Package(
         x = Histogram(100, -5.0, 5.0,
@@ -662,6 +670,7 @@ package = events.aggregate(Package(
 
 package.hs["x"].plot()
 \end{minted}
+\end{uncoverenv}
 \end{columns}
 \end{frame}
 
