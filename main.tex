@@ -25,6 +25,7 @@
 \usepackage{courier}
 \usepackage{bold-extra}
 \usepackage{minted}
+\usepackage{colortbl}
 
 \xdefinecolor{darkblue}{rgb}{0.1,0.1,0.7}
 \xdefinecolor{dianablue}{rgb}{0.18,0.24,0.31}
@@ -868,6 +869,46 @@ Now each bin in {\ttfamily\small x} contains
 \begin{center}
 \includegraphics[width=0.75\linewidth]{front-back-ends.pdf}
 \end{center}
+\end{frame}
+
+\begin{frame}{Current coverage}
+\vspace{0.4 cm}
+\renewcommand{\arraystretch}{1.1}
+\scriptsize
+\mbox{\hspace{-0.5 cm}}\begin{tabular}{l c c c c c c c c c c c c}
+Aggregator        & Scala                      & JVM-JIT & Python                     & Numpy                      & C-JIT                   & GPU                        & C++11                      & Julia & R & Javascript \\\hline\hline
+Count             & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{red!25}trial    & \cellcolor{yellow!50}DONE & & \\
+Sum               & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{red!25}trial    & \cellcolor{yellow!50}DONE & & \\
+Average           & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            & \cellcolor{yellow!50}DONE & & \\
+Deviate           & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            & \cellcolor{yellow!50}DONE & & \\
+Minimize          & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            & \cellcolor{yellow!50}DONE & & \\
+Maximize          & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            & \cellcolor{yellow!50}DONE & & \\
+Bag               & \cellcolor{green!25}DONE   &         & \cellcolor{green!25}DONE   & \cellcolor{green!25}DONE   & \cellcolor{green!25}DONE   &                            &                            & \cellcolor{green!25}DONE  & & \\\hline
+Bin               & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{red!25}trial    & \cellcolor{yellow!50}DONE & & \\
+SparselyBin       & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            &                            &                           & & \\
+CentrallyBin      & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            &                           & & \\
+IrregularlyBin    & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            &                           & & \\
+Categorize        & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            &                            &                           & & \\
+Fraction          & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            &                           & & \\
+Stack             & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            &                           & & \\
+Select            & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{red!25}trial    &                           & & \\\hline
+Label             & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            &                           & & \\
+UntypedLabel      & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            &                           & & \\
+Index             & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            &                           & & \\
+Branch            & \cellcolor{yellow!50}DONE  &         & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  & \cellcolor{yellow!50}DONE  &                            &                           & & \\\hline\hline
+\end{tabular}
+
+\vspace{-2.5 cm}
+\hfill \fcolorbox{black}{white}{\begin{minipage}{0.25\linewidth}
+\vspace{0.1 cm}
+\raggedright
+\scriptsize The ``Bag'' specification (multiset for scatter-plots) may be revised soon.
+
+\vspace{0.2 cm}
+The C++ implementation {\it will} be revised.
+\vspace{0.1 cm}
+\end{minipage}} \hspace{-1 cm}
+\vspace{2.5 cm}
 \end{frame}
 
 \begin{frame}{Designed for distributed workflows}
