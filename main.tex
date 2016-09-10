@@ -857,6 +857,30 @@ Now each bin in {\ttfamily\small x} contains
 \end{center}
 \end{frame}
 
+\begin{frame}{Designed for parallel filling}
+\vspace{1 cm}
+\begin{block}{Histogram-filling in Spark}
+\end{block}
+
+\includegraphics[width=\linewidth]{parallelization.pdf}
+
+\vspace{-1 cm}
+\[ \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{head node}} \hspace{0.6 cm} \underbrace{\mbox{\hspace{8.125 cm}}}_{\mbox{executor nodes}} \hspace{0.625 cm} \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{head node}} \]
+
+\end{frame}
+
+\begin{frame}{Designed for parallel filling}
+\vspace{1 cm}
+\begin{block}{Histogram-filling on a GPU}
+\end{block}
+
+\includegraphics[width=\linewidth]{parallelization.pdf}
+
+\vspace{-1 cm}
+\[ \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{host}} \hspace{0.6 cm} \underbrace{\mbox{\hspace{8.125 cm}}}_{\mbox{device}} \hspace{0.625 cm} \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{host}} \]
+
+\end{frame}
+
 \begin{frame}{}
 \hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec1.png}\hspace{-5 cm}}
 
@@ -981,30 +1005,6 @@ h.fill.root(muons)
 
 \vspace{0.25 cm}
 \uncover<2->{\fcolorbox{darkblue}{white}{\textcolor{darkblue}{Consistently 100 times faster than Python (and 30\% faster than generic C++ code).}}}
-\end{frame}
-
-\begin{frame}{}
-\vspace{1 cm}
-\begin{block}{Parallel histogramming in Spark}
-\end{block}
-
-\includegraphics[width=\linewidth]{parallelization.pdf}
-
-\vspace{-1 cm}
-\[ \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{head node}} \hspace{0.6 cm} \underbrace{\mbox{\hspace{8.125 cm}}}_{\mbox{executor nodes}} \hspace{0.625 cm} \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{head node}} \]
-
-\end{frame}
-
-\begin{frame}{}
-\vspace{1 cm}
-\begin{block}{Parallel histogramming on a GPU}
-\end{block}
-
-\includegraphics[width=\linewidth]{parallelization.pdf}
-
-\vspace{-1 cm}
-\[ \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{host}} \hspace{0.6 cm} \underbrace{\mbox{\hspace{8.125 cm}}}_{\mbox{device}} \hspace{0.625 cm} \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{host}} \]
-
 \end{frame}
 
 \begin{frame}[fragile]{GPU code generation}
