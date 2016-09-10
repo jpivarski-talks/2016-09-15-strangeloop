@@ -832,133 +832,291 @@
 %% \end{center}
 %% \end{frame}
 
-\begin{frame}{}
-\hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{frontpage.png}\hspace{-5 cm}}
-\end{frame}
+%% \begin{frame}{}
+%% \hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{frontpage.png}\hspace{-5 cm}}
+%% \end{frame}
 
-\begin{frame}{Histogrammar}
-\large Histogrammar is a suite of composable aggregators with
+%% \begin{frame}{Histogrammar}
+%% \large Histogrammar is a suite of composable aggregators with
 
-\vspace{0.3 cm}
-\begin{itemize}\setlength{\itemsep}{0.3 cm}
-\item<2-> a language-independent specification,
-\item<3-> several language versions (Python and Scala are the most complete),
-\item<4-> an interchangeable JSON format,
-\item<5-> multiple filling back-ends: ``normal,'' SparkSQL optimizations, Numpy optimizations, JIT-compilation, GPU (CUDA) code generation\ldots
-\item<6-> no built-in plotting: Matplotlib, Bokeh, ROOT as front-ends.
-\end{itemize}
-\end{frame}
+%% \vspace{0.3 cm}
+%% \begin{itemize}\setlength{\itemsep}{0.3 cm}
+%% \item<2-> a language-independent specification,
+%% \item<3-> several language versions (Python and Scala are the most complete),
+%% \item<4-> an interchangeable JSON format,
+%% \item<5-> multiple filling back-ends: ``normal,'' SparkSQL optimizations, Numpy optimizations, JIT-compilation, GPU (CUDA) code generation\ldots
+%% \item<6-> no built-in plotting: Matplotlib, Bokeh, ROOT as front-ends.
+%% \end{itemize}
+%% \end{frame}
 
-\begin{frame}{Histogrammar}
+%% \begin{frame}{Histogrammar}
+%% \vspace{0.5 cm}
+%% \begin{center}
+%% \includegraphics[width=0.9\linewidth]{front-back-ends.pdf}
+%% \end{center}
+%% \end{frame}
+
+%% \begin{frame}{}
+%% \hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec1.png}\hspace{-5 cm}}
+
+%% \vspace{-6.7 cm}
+%% \hfill \fcolorbox{darkblue}{white}{\begin{minipage}{0.55\linewidth}
+%% \vspace{0.75 cm}
+%% \centering \textcolor{darkblue}{Screenshots from the specification}
+
+%% \centering \textcolor{darkblue}{\url{http://histogrammar.org/docs/specification}}
+%% \vspace{0.75 cm}
+%% \end{minipage}} \hspace{-1 cm}
+%% \vspace{6.7 cm}
+%% \end{frame}
+
+%% \begin{frame}{}
+%% \hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec2.png}\hspace{-5 cm}}
+%% \end{frame}
+
+%% \begin{frame}{}
+%% \hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec3.png}\hspace{-5 cm}}
+%% \end{frame}
+
+%% \begin{frame}{}
+%% \hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec4.png}\hspace{-5 cm}}
+%% \end{frame}
+
+%% \begin{frame}{}
+%% \hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec5.png}\hspace{-5 cm}}
+%% \end{frame}
+
+%% \begin{frame}{}
+%% \hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{tutorials.png}\hspace{-5 cm}}
+
+%% \vspace{-7.5 cm}
+%% \hfill \fcolorbox{darkblue}{white}{\begin{minipage}{0.65\linewidth}
+%% \vspace{0.75 cm}
+%% \centering \textcolor{darkblue}{Tutorials page}
+
+%% \centering \textcolor{darkblue}{\url{http://histogrammar.org/docs/tutorials}}
+%% \vspace{0.75 cm}
+%% \end{minipage}} \hspace{-1 cm}
+%% \vspace{7.5 cm}
+%% \end{frame}
+
+%% \begin{frame}[fragile]{Spark RDD and DataFrame back-ends}
+%% \vspace{0.5 cm}
+%% \textcolor{darkblue}{\large Spark RDD: provide an opaque function}
+
+%% \begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
+%% implicit class DoublePow(x: Double) {
+%%   def **(power: Double) = Math.pow(x, power)
+%% }
+%% \end{lstlisting}
+
+%% \vspace{-0.25 cm}
+%% \small
+%% \begin{minted}{scala}
+%% import org.dianahep.histogrammar._
+%% val h = rdd.aggregate(
+%%   Bin(10, 0, 100, {mu: Muon => Math.sqrt(mu.px**2 + mu.py**2)}))
+%%   (new Increment, new Combine)
+%% \end{minted}
+
+%% \vspace{0.5 cm}
+%% \textcolor{darkblue}{\large Spark SQL: provide a transformation on columns}
+
+%% \begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
+%% implicit class ColumnPow(x: org.apache.spark.sql.Column) {
+%%   def **(power: Double) = org.apache.spark.sql.functions.pow(x, power)
+%% }
+%% \end{lstlisting}
+
+%% \vspace{-0.25 cm}
+%% \small
+%% \begin{minted}{scala}
+%% import org.dianahep.histogrammar.sparksql._
+%% val h = df.histogrammar(Bin(10, 0, 100, sqrt($"px"**2 + $"py"**2)))
+%% \end{minted}
+%% \end{frame}
+
+%% \begin{frame}[fragile]{Python and Numpy back-end}
+%% \vspace{0.5 cm}
+%% \textcolor{darkblue}{\large Python: provide a lambda or a quoted expression}
+
+%% \begin{minted}{python}
+%% from math import *
+%% from histogrammar import *
+
+%% h = Bin(10, 0, 100, lambda mu: sqrt(mu.px**2 + mu.py**2))
+%% h = Bin(10, 0, 100, "sqrt(px**2 + py**2)")
+%% for mu in muons:
+%%     h.fill(mu)
+%% \end{minted}
+
+%% \vspace{0.25 cm}
+%% \textcolor{darkblue}{\large Numpy: provide a quoted expression}
+
+%% \begin{minted}{python}
+%% h = Bin(10, 0, 100, "np.sqrt(px**2 + py**2)")
+%% h.fill.numpy(muons)
+%% \end{minted}
+
+%% Expression operates on 1D arrays (that may have come from a Pandas DataFrame).
+
+%% \vspace{0.25 cm}
+%% \uncover<2->{\fcolorbox{darkblue}{white}{\textcolor{darkblue}{Speedups ranged from nothing (string handling) to 150 times (sum, min, max, etc.).}}}
+%% \vspace{0.25 cm}
+%% \end{frame}
+
+%% \begin{frame}[fragile]{JIT compilation}
+%% \begin{minted}{python}
+%% h = Bin(10, 0, 100, "sqrt(px*px + py*py)")   # C code
+%% h.fill.root(muons)
+%% \end{minted}
+
+%% \begin{enumerate}\setlength{\itemsep}{0.3 cm}
+%% \item Walk tree of aggregators to generate (cache-aware) C code instead of filling.
+%% \item Compile the C code (in ROOT with LLVM).
+%% \item Evaluate for a large dataset.
+%% \item Update the original aggregator.
+%% \end{enumerate}
+
+%% \vspace{0.25 cm}
+%% \uncover<2->{\fcolorbox{darkblue}{white}{\textcolor{darkblue}{Consistently 100 times faster than Python (and 30\% faster than generic C++ code).}}}
+%% \end{frame}
+
+%% \begin{frame}{}
+%% \vspace{1 cm}
+%% \begin{block}{Parallel histogramming in Spark}
+%% \end{block}
+
+%% \includegraphics[width=\linewidth]{parallelization.pdf}
+
+%% \vspace{-1 cm}
+%% \[ \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{head node}} \hspace{0.6 cm} \underbrace{\mbox{\hspace{8.125 cm}}}_{\mbox{executor nodes}} \hspace{0.625 cm} \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{head node}} \]
+
+%% \end{frame}
+
+%% \begin{frame}{}
+%% \vspace{1 cm}
+%% \begin{block}{Parallel histogramming on a GPU}
+%% \end{block}
+
+%% \includegraphics[width=\linewidth]{parallelization.pdf}
+
+%% \vspace{-1 cm}
+%% \[ \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{host}} \hspace{0.6 cm} \underbrace{\mbox{\hspace{8.125 cm}}}_{\mbox{device}} \hspace{0.625 cm} \underbrace{\mbox{\hspace{2 cm}}}_{\mbox{host}} \]
+
+%% \end{frame}
+
+%% \begin{frame}[fragile]{GPU code generation}
+%% \vspace{0.5 cm}
+%% \textcolor{darkblue}{\large Special case of JIT: generates parallel CUDA code.}
+
+%% \begin{center}
+%% \begin{minipage}{0.7\linewidth}
+%% \small
+%% \begin{minted}{python}
+%% h = Bin(10, 0, 100, "sqrt(px*px + py*py)")
+%%                         # expression in C'99
+
+%% print h.cuda()          # prints CUDA code
+
+%% h.fill.pycuda(muons)    # evaluates with PyCUDA
+%% \end{minted}
+%% \end{minipage}
+%% \end{center}
+
+%% \large
+%% \begin{itemize}
+%% \item<2-> Not intended as an accelerator (due to cost of sending data to GPU).
+%% \item<3-> Intended as a convenience for developing GPU algorithms: the generated kernels are meant to be incorporated into other GPU projects.
+%% \item<4-> Data reduction (even a simple counter) is tricky on a GPU. Histogrammar generates a simple function that outputs JSON, to be plotted in an analysis framework (Python, Scala, \ldots).
+%% \end{itemize}
+%% \end{frame}
+
+\begin{frame}{The unreasonable effectiveness of mathematics}
 \vspace{0.5 cm}
-\begin{center}
-\includegraphics[width=0.9\linewidth]{front-back-ends.pdf}
-\end{center}
-\end{frame}
+\large
+Learned (along the way) that all aggregators must be:
 
-\begin{frame}{}
-\hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec1.png}\hspace{-5 cm}}
+\vspace{0.25 cm}
+\begin{uncoverenv}<2->
+\hspace{1 cm}{\bf Additive}
 
-\vspace{-6.7 cm}
-\hfill \fcolorbox{darkblue}{white}{\begin{minipage}{0.55\linewidth}
-\vspace{0.75 cm}
-\centering \textcolor{darkblue}{Screenshots from the specification}
-
-\centering \textcolor{darkblue}{\url{http://histogrammar.org/docs/specification}}
-\vspace{0.75 cm}
-\end{minipage}} \hspace{-1 cm}
-\vspace{6.7 cm}
-\end{frame}
-
-\begin{frame}{}
-\hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec2.png}\hspace{-5 cm}}
-\end{frame}
-
-\begin{frame}{}
-\hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec3.png}\hspace{-5 cm}}
-\end{frame}
-
-\begin{frame}{}
-\hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec4.png}\hspace{-5 cm}}
-\end{frame}
-
-\begin{frame}{}
-\hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{spec5.png}\hspace{-5 cm}}
-\end{frame}
-
-\begin{frame}{}
-\hspace{-1 cm}\mbox{\includegraphics[width=16 cm]{tutorials.png}\hspace{-5 cm}}
-
-\vspace{-7.5 cm}
-\hfill \fcolorbox{darkblue}{white}{\begin{minipage}{0.65\linewidth}
-\vspace{0.75 cm}
-\centering \textcolor{darkblue}{Tutorials page}
-
-\centering \textcolor{darkblue}{\url{http://histogrammar.org/docs/tutorials}}
-\vspace{0.75 cm}
-\end{minipage}} \hspace{-1 cm}
-\vspace{7.5 cm}
-\end{frame}
-
-\begin{frame}[fragile]{Spark RDD and DataFrame back-ends}
-\vspace{0.5 cm}
-\textcolor{darkblue}{\large Spark RDD: provide an opaque function}
-
-\begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
-implicit class DoublePow(x: Double) {
-  def **(power: Double) = Math.pow(x, power)
-}
-\end{lstlisting}
+\vspace{0.1 cm}
+\hspace{1.5 cm}Independent of {\it whether} datasets are partitioned.
 
 \vspace{-0.25 cm}
-\small
-\begin{minted}{scala}
-import org.dianahep.histogrammar._
-val h = rdd.aggregate(
-  Bin(10, 0, 100, {mu: Muon => Math.sqrt(mu.px**2 + mu.py**2)}))
-  (new Increment, new Combine)
-\end{minted}
+\[ \textcolor{darkblue}{h_1 + h_2} = \textcolor{darkblue}{\mbox{fill}(\mbox{data}_1 + \mbox{data}_2)} = \textcolor{darkblue}{\mbox{fill}(\mbox{data}_1) + \mbox{fill}(\mbox{data}_2)} \]
+\end{uncoverenv}
 
-\vspace{0.5 cm}
-\textcolor{darkblue}{\large Spark SQL: provide a transformation on columns}
+\vspace{-0.2 cm}
+\begin{uncoverenv}<3->
+\hspace{1 cm}{\bf Associative}
 
-\begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
-implicit class ColumnPow(x: org.apache.spark.sql.Column) {
-  def **(power: Double) = org.apache.spark.sql.functions.pow(x, power)
-}
-\end{lstlisting}
+\vspace{0.1 cm}
+\hspace{1.5 cm}Independent of {\it where} datasets are partitioned.
 
 \vspace{-0.25 cm}
-\small
-\begin{minted}{scala}
-import org.dianahep.histogrammar.sparksql._
-val h = df.histogrammar(Bin(10, 0, 100, sqrt($"px"**2 + $"py"**2)))
-\end{minted}
-\end{frame}
+\[ \textcolor{darkblue}{(h_1 + h_2) + h_3} = \textcolor{darkblue}{h_1 + (h_2 + h_3)} \]
+\end{uncoverenv}
 
-\begin{frame}{Numpy back-end}
-No Python for loops over the data.
-\end{frame}
+\vspace{-0.2 cm}
+\begin{uncoverenv}<4->
+\hspace{1 cm}{\bf Commutative}
 
-\begin{frame}{JIT compilation}
-\end{frame}
+\vspace{0.1 cm}
+\hspace{1.5 cm}Independent of {\it order} of combining parts. \textcolor{gray}{\normalsize (Not essential, but convenient.)}
 
-\begin{frame}{GPU}
+\vspace{-0.25 cm}
+\[ \textcolor{darkblue}{h_1 + h_2} = \textcolor{darkblue}{h_2 + h_1} \]
+\end{uncoverenv}
 \end{frame}
 
 \begin{frame}{The unreasonable effectiveness of mathematics}
-\end{frame}
+\large
+\begin{columns}
+\column{0.5\linewidth}
+\begin{center}
+\bf \underline{RIP: AdaptivelyBin}
+\end{center}
 
-\begin{frame}{RIP: AdaptivelyBin}
-\end{frame}
+\begin{description}
+\item[Want:] aggregator that determines binning from data.
 
-\begin{frame}{RIP: AdaptivelyBin}
-\end{frame}
+\item[Tried:] each new datapoint is a new bin; merge closest bins.
 
-\begin{frame}{RIP: Sample}
-\end{frame}
+\vspace{0.25 cm}
+\begin{minipage}{\linewidth}
+\scriptsize Ben-Haim and Tom-Tov, \href{http://www.jmlr.org/papers/volume11/ben-haim10a/ben-haim10a.pdf}{\textcolor{blue}{``A streaming parallel decision tree algorithm''}} {\it J. Machine Learning Research 11 (2010).}
+\end{minipage}
 
-\begin{frame}{RIP: Quantile}
+\item[Problem:] {\ttfamily\small\textbf{fill}} depends on order in which data arrive.
+\end{description}
+
+\begin{center}
+\textcolor{darkblue}{Any ideas?}
+\end{center}
+
+\column{0.5\linewidth}
+\begin{uncoverenv}<2->
+\begin{center}
+\bf \underline{RIP: Quantile}
+\end{center}
+
+\begin{description}
+\item[Want:] approximate median or other quantiles.
+
+\item[Tried:] incrementally minimize mean absolute error from target quantile.
+
+\item[Problem:] {\ttfamily\small\textbf{fill}} depends on order in which data arrive, and
+
+{\ttfamily\small\textbf{+}} not additive.
+\end{description}
+
+\begin{center}
+\textcolor{darkblue}{Any ideas?}
+\end{center}
+\end{uncoverenv}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Getting involved}
