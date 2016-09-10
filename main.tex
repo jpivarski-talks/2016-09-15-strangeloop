@@ -1028,8 +1028,8 @@ h.fill.pycuda(muons)    # evaluates with PyCUDA
 \large
 \begin{itemize}
 \item<2-> Not intended as an accelerator (due to cost of sending data to GPU).
-\item<3-> Intended as a convenience for developing GPU algorithms: the generated kernels are meant to be incorporated into other GPU projects.
-\item<4-> Data reduction (even a simple counter) is tricky on a GPU. Histogrammar generates a function that outputs JSON, to be plotted externally (Python, Scala, \ldots).
+\item<3-> Intended as a convenience for developing GPU algorithms: the generated kernels are meant to be incorporated into other GPU projects so that those developers can see what they're doing.
+\item<4-> Data reduction (even a simple counter) is tricky on a GPU. Histogrammar generates a function that outputs JSON, to be plotted externally.
 \end{itemize}
 \end{frame}
 
