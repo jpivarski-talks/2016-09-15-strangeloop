@@ -955,8 +955,10 @@ val h = rdd.aggregate(
   (new Increment, new Combine)
 \end{minted}
 
+\textcolor{gray}{(Statically typed to function arguments, hidden by type inference.)}
+
 \vspace{0.5 cm}
-\textcolor{darkblue}{\large Spark SQL: provide a transformation on columns}
+\textcolor{darkblue}{\large SparkSQL: provide a transformation on columns}
 
 \begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
 implicit class ColumnPow(x: org.apache.spark.sql.Column) {
