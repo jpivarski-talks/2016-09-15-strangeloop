@@ -1090,7 +1090,7 @@ Learned (along the way) that all aggregators must be:
 \scriptsize Ben-Haim and Tom-Tov, \href{http://www.jmlr.org/papers/volume11/ben-haim10a/ben-haim10a.pdf}{\textcolor{blue}{``A streaming parallel decision tree algorithm''}} {\it J. Machine Learning Research 11 (2010).}
 \end{minipage}
 
-\item[Problem:] {\ttfamily\small\textbf{fill}} depends on order in which data arrive.
+\item[Problem:] {\ttfamily\small\textbf{fill}} depends on order in which data arrive, not additive or associative.
 \end{description}
 
 \begin{center}
@@ -1108,9 +1108,7 @@ Learned (along the way) that all aggregators must be:
 
 \item[Tried:] incrementally minimize mean absolute error from target quantile.
 
-\item[Problem:] {\ttfamily\small\textbf{fill}} depends on order in which data arrive, and
-
-{\ttfamily\small\textbf{+}} not additive.
+\item[Problem:] {\ttfamily\small\textbf{fill}} depends on order in which data arrive, not additive or associative.
 \end{description}
 
 \begin{center}
