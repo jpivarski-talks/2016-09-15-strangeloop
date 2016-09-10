@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   width="1598.8109"
+   height="824.23596"
+   sodipodi:docname="octopus_ending.svg">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="886"
+     inkscape:window-height="715"
+     id="namedview4"
+     showgrid="false"
+     fit-margin-top="5"
+     fit-margin-left="5"
+     fit-margin-right="5"
+     fit-margin-bottom="5"
+     inkscape:zoom="1.8089669"
+     inkscape:cx="806.80575"
+     inkscape:cy="597.77683"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <image
+     width="600"
+     height="738"
+     xlink:href="file:///var/host/media/removable/SDCARD/talks/2016-09-15-strangeloop/octopus.png"
+     id="image10"
+     x="-1082.9752"
+     y="-819.23596"
+     transform="scale(-1,-1)" />
+  <text
+     xml:space="preserve"
+     style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     x="279.54419"
+     y="193.46443"
+     id="text2987"
+     sodipodi:linespacing="105%"><tspan
+       sodipodi:role="line"
+       id="tspan2989"
+       x="279.54419"
+       y="193.46443"></tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     x="398.94934"
+     y="147.0291"
+     id="text2991"
+     sodipodi:linespacing="105%"><tspan
+       sodipodi:role="line"
+       id="tspan2993"
+       x="398.94934"
+       y="147.0291">SQL/NoSQL</tspan><tspan
+       sodipodi:role="line"
+       x="398.94934"
+       y="189.0291"
+       id="tspan2995">databases</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     x="339.24677"
+     y="332.77045"
+     id="text2997"
+     sodipodi:linespacing="105%"><tspan
+       sodipodi:role="line"
+       id="tspan2999"
+       x="339.24677"
+       y="332.77045">TensorFlow</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     x="308.28986"
+     y="529.56787"
+     id="text3001"
+     sodipodi:linespacing="105%"><tspan
+       sodipodi:role="line"
+       id="tspan3003"
+       x="308.28986"
+       y="529.56787">UNIX command</tspan><tspan
+       sodipodi:role="line"
+       x="308.28986"
+       y="571.56787"
+       id="tspan3005">line tool</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     x="308.28986"
+     y="768.37817"
+     id="text3007"
+     sodipodi:linespacing="105%"><tspan
+       sodipodi:role="line"
+       id="tspan3009"
+       x="308.28986"
+       y="768.37817">Streaming taps</tspan><tspan
+       sodipodi:role="line"
+       x="308.28986"
+       y="810.37817"
+       id="tspan3011">(Storm, etc.)</tspan></text>
+  <text
+     sodipodi:linespacing="105%"
+     id="text3015"
+     y="147.0291"
+     x="1198.3088"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     xml:space="preserve"><tspan
+       y="147.0291"
+       x="1198.3088"
+       sodipodi:role="line"
+       id="tspan3039">Binary format</tspan><tspan
+       y="189.0291"
+       x="1198.3088"
+       sodipodi:role="line"
+       id="tspan3051">(replacing JSON)</tspan></text>
+  <text
+     sodipodi:linespacing="105%"
+     id="text3021"
+     y="332.77045"
+     x="1262.2693"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     xml:space="preserve"><tspan
+       y="332.77045"
+       x="1262.2693"
+       id="tspan3023"
+       sodipodi:role="line">plot.ly</tspan></text>
+  <text
+     sodipodi:linespacing="105%"
+     id="text3025"
+     y="529.56787"
+     x="1291.566"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     xml:space="preserve"><tspan
+       id="tspan3029"
+       y="529.56787"
+       x="1291.566"
+       sodipodi:role="line">Jupyter</tspan><tspan
+       y="571.56787"
+       x="1291.566"
+       sodipodi:role="line"
+       id="tspan3043">notebooks</tspan></text>
+  <text
+     sodipodi:linespacing="105%"
+     id="text3031"
+     y="768.37817"
+     x="1290.7457"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     xml:space="preserve"><tspan
+       id="tspan3035"
+       y="768.37817"
+       x="1290.7457"
+       sodipodi:role="line">SAGE, MATLAB,</tspan><tspan
+       y="810.37817"
+       x="1290.7457"
+       sodipodi:role="line"
+       id="tspan3047">Mathematica, etc.</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     x="272.91406"
+     y="43.679958"
+     id="text3053"
+     sodipodi:linespacing="105%"><tspan
+       sodipodi:role="line"
+       id="tspan3055"
+       x="272.91406"
+       y="43.679958">More back-end ideas...</tspan></text>
+  <text
+     sodipodi:linespacing="105%"
+     id="text3059"
+     y="41.46875"
+     x="1326.3422"
+     style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
+     xml:space="preserve"><tspan
+       y="41.46875"
+       x="1326.3422"
+       id="tspan3061"
+       sodipodi:role="line">More front-end ideas...</tspan></text>
+</svg>
