@@ -669,14 +669,14 @@ class Package:     # also in the library
       return {n: self.hs[n] + other.hs[n]
                         for n in self.hs}
 
-package = events.aggregate(Package(
+pkg = events.aggregate(Package(
         x = Histogram(100, -5.0, 5.0,
                 lambda ev: ev.calcX()),
         y = Histogram(100, -5.0, 5.0,
                 lambda ev: ev.calcY()))
     increment, combine)
 
-package.hs["x"].plot()
+pkg.hs["x"].plot()
 \end{minted}
 \end{uncoverenv}
 \end{columns}
