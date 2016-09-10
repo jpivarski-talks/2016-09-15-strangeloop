@@ -181,8 +181,8 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0566705"
-     inkscape:cx="193.30093"
-     inkscape:cy="144.66365"
+     inkscape:cx="298.51733"
+     inkscape:cy="108.03014"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -204,7 +204,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -270,8 +270,8 @@
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3984"
-       width="62.223755"
-       height="15.378494"
+       width="53.706436"
+       height="15.378479"
        x="421.13135"
        y="552.00183" />
     <text
@@ -388,9 +388,9 @@
          y="379.10229">SparkSQL</tspan></text>
     <rect
        y="371.29779"
-       x="443.74905"
-       height="15.378494"
-       width="62.223755"
+       x="454.15912"
+       height="14.905293"
+       width="35.252277"
        id="rect3982"
        style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <text
