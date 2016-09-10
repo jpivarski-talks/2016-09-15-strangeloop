@@ -980,11 +980,11 @@ val h = df.histogrammar(Bin(10, 0, 100, sqrt($"px"**2 + $"py"**2)))
 \vspace{0.5 cm}
 \textcolor{darkblue}{\large Python: provide a lambda or a quoted expression}
 
+\small
 \begin{minted}{python}
 from math import sqrt
 from histogrammar import *
-
-h = Bin(10, 0, 100, lambda mu: sqrt(mu.px**2 + mu.py**2))
+h = Bin(10, 0, 100, lambda muon: sqrt(muon.px**2 + muon.py**2))
 h = Bin(10, 0, 100, "sqrt(px**2 + py**2)")
 for mu in muons:
     h.fill(mu)
@@ -993,10 +993,11 @@ for mu in muons:
 \vspace{0.25 cm}
 \textcolor{darkblue}{\large Numpy: provide a lambda or a quoted expression}
 
+\small
 \begin{minted}{python}
 from numpy import sqrt
-
-h = Bin(10, 0, 100, lambda muons: sqrt(muons["px"]**2 + muons["py"]**2))
+h = Bin(10, 0, 100, lambda muons:
+                        sqrt(muons["px"]**2 + muons["py"]**2))
 h = Bin(10, 0, 100, "np.sqrt(px**2 + py**2)")
 h.fill.numpy(muons)
 \end{minted}
@@ -1004,7 +1005,7 @@ h.fill.numpy(muons)
 Expression operates on 1D arrays (that may have come from a Pandas DataFrame).
 
 \vspace{0.25 cm}
-\uncover<2->{\fcolorbox{darkblue}{white}{\textcolor{darkblue}{Speedups range from nothing (string handling) to 150 times (sum, min, max, etc.).}}}
+\uncover<2->{\fcolorbox{darkblue}{white}{\textcolor{darkblue}{Speedups range from nothing (string handling) to 100 times.}}}
 \vspace{0.25 cm}
 \end{frame}
 
