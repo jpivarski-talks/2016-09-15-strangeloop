@@ -991,9 +991,12 @@ for mu in muons:
 \end{minted}
 
 \vspace{0.25 cm}
-\textcolor{darkblue}{\large Numpy: provide a quoted expression}
+\textcolor{darkblue}{\large Numpy: provide a lambda or a quoted expression}
 
 \begin{minted}{python}
+from numpy import sqrt
+
+h = Bin(10, 0, 100, lambda muons: sqrt(muons["px"]**2 + muons["py"]**2))
 h = Bin(10, 0, 100, "np.sqrt(px**2 + py**2)")
 h.fill.numpy(muons)
 \end{minted}
