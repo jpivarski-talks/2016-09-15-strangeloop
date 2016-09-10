@@ -900,7 +900,40 @@
 \vspace{7.5 cm}
 \end{frame}
 
-\begin{frame}{SparkSQL back-end}
+\begin{frame}[fragile]{Spark RDD and DataFrame back-ends}
+\vspace{0.5 cm}
+\textcolor{darkblue}{\large Spark RDD: provide an opaque function}
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
+implicit class DoublePow(x: Double) {
+  def **(power: Double) = Math.pow(x, power)
+}
+\end{lstlisting}
+
+\vspace{-0.25 cm}
+\small
+\begin{minted}{scala}
+import org.dianahep.histogrammar._
+val h = rdd.aggregate(
+  Bin(10, 0, 100, {mu: Muon => Math.sqrt(mu.px**2 + mu.py**2)}))
+  (new Increment, new Combine)
+\end{minted}
+
+\vspace{0.5 cm}
+\textcolor{darkblue}{\large Spark SQL: provide a transformation on columns}
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
+implicit class ColumnPow(x: org.apache.spark.sql.Column) {
+  def **(power: Double) = org.apache.spark.sql.functions.pow(x, power)
+}
+\end{lstlisting}
+
+\vspace{-0.25 cm}
+\small
+\begin{minted}{scala}
+import org.dianahep.histogrammar.sparksql._
+val h = df.histogrammar(Bin(10, 0, 100, sqrt($"px"**2 + $"py"**2)))
+\end{minted}
 \end{frame}
 
 \begin{frame}{Numpy back-end}
