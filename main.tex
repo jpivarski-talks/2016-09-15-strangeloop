@@ -979,7 +979,7 @@ val h = df.histogrammar(Bin(10, 0, 100, sqrt($"px"**2 + $"py"**2)))
 \textcolor{darkblue}{\large Python: provide a lambda or a quoted expression}
 
 \begin{minted}{python}
-from math import *
+from math import sqrt
 from histogrammar import *
 
 h = Bin(10, 0, 100, lambda mu: sqrt(mu.px**2 + mu.py**2))
