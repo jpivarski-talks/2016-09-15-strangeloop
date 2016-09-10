@@ -997,15 +997,13 @@ for mu in muons:
 \begin{minted}{python}
 from numpy import sqrt
 h = Bin(10, 0, 100, lambda muons:
-                        sqrt(muons["px"]**2 + muons["py"]**2))
+                         sqrt(muons["px"]**2 + muons["py"]**2))
 h = Bin(10, 0, 100, "np.sqrt(px**2 + py**2)")
 h.fill.numpy(muons)
 \end{minted}
 
-Expression operates on 1D arrays (that may have come from a Pandas DataFrame).
-
 \vspace{0.25 cm}
-\uncover<2->{\fcolorbox{darkblue}{white}{\textcolor{darkblue}{Speedups range from nothing (string handling) to 100 times.}}}
+\uncover<2->{\fcolorbox{darkblue}{white}{\textcolor{darkblue}{Speedups range from nothing (string handling) to 100 times (depending on specific case).}}}
 \vspace{0.25 cm}
 \end{frame}
 
