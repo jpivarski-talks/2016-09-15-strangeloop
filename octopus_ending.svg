@@ -109,10 +109,14 @@
        sodipodi:role="line"
        id="tspan3003"
        x="308.28986"
-       y="529.56787">UNIX command</tspan><tspan
+       y="529.56787">awk-like</tspan><tspan
        sodipodi:role="line"
        x="308.28986"
        y="571.56787"
+       id="tspan3022">UNIX command</tspan><tspan
+       sodipodi:role="line"
+       x="308.28986"
+       y="613.56787"
        id="tspan3005">line tool</tspan></text>
   <text
      xml:space="preserve"
@@ -153,8 +157,12 @@
      xml:space="preserve"><tspan
        y="332.77045"
        x="1262.2693"
-       id="tspan3023"
-       sodipodi:role="line">plot.ly</tspan></text>
+       sodipodi:role="line"
+       id="tspan3010">plot.ly, Jupyter</tspan><tspan
+       y="374.77045"
+       x="1262.2693"
+       sodipodi:role="line"
+       id="tspan3020">notebooks, etc.</tspan></text>
   <text
      sodipodi:linespacing="105%"
      id="text3025"
@@ -162,14 +170,18 @@
      x="1291.566"
      style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
      xml:space="preserve"><tspan
-       id="tspan3029"
        y="529.56787"
        x="1291.566"
-       sodipodi:role="line">Jupyter</tspan><tspan
+       sodipodi:role="line"
+       id="tspan3043">continuously</tspan><tspan
        y="571.56787"
        x="1291.566"
        sodipodi:role="line"
-       id="tspan3043">notebooks</tspan></text>
+       id="tspan3016">filling animation</tspan><tspan
+       y="613.56787"
+       x="1291.566"
+       sodipodi:role="line"
+       id="tspan3018">as data arrive</tspan></text>
   <text
      sodipodi:linespacing="105%"
      id="text3031"
