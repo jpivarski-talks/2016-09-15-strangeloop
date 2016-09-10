@@ -706,37 +706,44 @@ Generic aggregators:
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{}
-\vspace{1.5 cm}
-\textcolor{darkblue}{\Large Spark example in Python:}
-\small
-\begin{minted}{python}
-pkg = events.aggregate(
-    Label(x = Bin(100, -5.0, 5.0, lambda ev: ev.calcX(), Count()),
-          y = Bin(100, -5.0, 5.0, lambda ev: ev.calcY(), Count()),
-          z = Bin(100, -5.0, 5.0, lambda ev: ev.calcZ(), Count())),
-    increment, combine)
-\end{minted}
+%% \begin{frame}[fragile]{}
+%% \vspace{1.5 cm}
+%% \textcolor{darkblue}{\Large Spark example in Python:}
+%% \small
+%% \begin{minted}{python}
+%% pkg = events.aggregate(
+%%     Label(x = Bin(100, -5.0, 5.0, lambda ev: ev.calcX(), Count()),
+%%           y = Bin(100, -5.0, 5.0, lambda ev: ev.calcY(), Count()),
+%%           z = Bin(100, -5.0, 5.0, lambda ev: ev.calcZ(), Count())),
+%%     increment, combine)
+%% \end{minted}
 
-\vspace{0.75 cm}
-\textcolor{darkblue}{\Large Spark example in Scala:}
-\small
-\begin{minted}{scala}
-val pkg = events.aggregate(
-    Label(x -> Bin(100, -5.0, 5.0, {ev: Event => ev.calcX}, Count()),
-          y -> Bin(100, -5.0, 5.0, {ev: Event => ev.calcY}, Count()),
-          z -> Bin(100, -5.0, 5.0, {ev: Event => ev.calcZ}, Count())))
-    (new Increment, new Combine)
-\end{minted}
+%% \vspace{0.75 cm}
+%% \textcolor{darkblue}{\Large Spark example in Scala:}
+%% \small
+%% \begin{minted}{scala}
+%% val pkg = events.aggregate(
+%%     Label(x -> Bin(100, -5.0, 5.0, {ev: Event => ev.calcX}, Count()),
+%%           y -> Bin(100, -5.0, 5.0, {ev: Event => ev.calcY}, Count()),
+%%           z -> Bin(100, -5.0, 5.0, {ev: Event => ev.calcZ}, Count())))
+%%     (new Increment, new Combine)
+%% \end{minted}
 
-\normalsize Type parameters inferred from arguments, propagated to \textcolor{blue}{\ttfamily\small \textbf{Increment}} and \textcolor{blue}{\ttfamily\small \textbf{Combine}}.
-\end{frame}
+%% \normalsize Type parameters inferred from arguments, propagated to \textcolor{blue}{\ttfamily\small \textbf{Increment}} and \textcolor{blue}{\ttfamily\small \textbf{Combine}}.
+%% \end{frame}
 
 \begin{frame}[fragile]{With the right set of aggregators, you can do anything}
 \vspace{0.5 cm}
 \begin{columns}
 \column{0.5\linewidth}
 \small
+\textcolor{darkblue}{\normalsize Histograms:}
+\begin{minted}{python}
+Bin(num, low, high, fillRule,
+  Count())
+\end{minted}
+
+\vspace{0.25 cm}
 \textcolor{darkblue}{\normalsize Two-dimensional histograms:}
 \begin{minted}{python}
 Bin(xnum, xlow, xhigh, xfill,
@@ -744,7 +751,7 @@ Bin(xnum, xlow, xhigh, xfill,
     Count()))
 \end{minted}
 
-\vspace{1.5 cm}
+\vspace{0.25 cm}
 \textcolor{darkblue}{\normalsize Profile plots:}
 \begin{minted}{python}
 Bin(xnum, xlow, xhigh, xfill,
