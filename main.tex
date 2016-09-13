@@ -200,7 +200,7 @@
 \begin{frame}{}
 \vspace{1 cm}
 \begin{center}
-\large Considering how much has been developed on both sides of the divide, \\ small ``glue projects'' connecting them can make a big difference.
+\large Considering how much has been developed on both sides of the divide, \\ small ``glue projects'' connecting them can have a big impact.
 \end{center}
 
 \vspace{1 cm}
@@ -246,7 +246,7 @@ Obviously. This really is a unique problem.
 \includegraphics[height=1.5 cm]{stamp_promulgate.png}
 \end{center}
 
-Cultural exchange goes both ways.
+Cultural exchange goes in both directions.
 \end{uncoverenv}
 \end{columns}
 \end{frame}
@@ -356,6 +356,7 @@ histogram(X, nbins)
 \vspace{0.5 cm}
 HEP software (HBOOK, PAW, ROOT, HippoDraw, AIDA, \ldots) treats histograms as {\it fillable containers.}
 
+\vspace{0.25 cm}
 \begin{center}
 \fbox{\begin{minipage}{0.6\linewidth}
 \vspace{0.3 cm}
@@ -388,26 +389,27 @@ h.plot()
 \end{minipage}}
 \end{center}
 
+\vspace{0.25 cm}
 API presumes the dataset is too big for a single function call.
 
 \vspace{0.25 cm}
 {\it Intrinsically} single-pass (implementation can't pre-scan to set bin width or range).
 
-\vspace{-5 cm}
-\hfill \begin{minipage}{0.17\linewidth}
-\vspace{0.25 cm}
-\scriptsize
+\vspace{-6 cm}
 \begin{uncoverenv}<2->
+\hfill \fcolorbox{black}{white}{\begin{minipage}{0.3\linewidth}
+\scriptsize
 \includegraphics[width=\linewidth]{hbook.png}
 
-{\centering (HBOOK is 43 year old software.)}
+\mbox{ } \hfill (HBOOK has been doing \hfill \mbox{ }
+
+\mbox{ } \hfill this for 43 years.) \hfill \mbox{ }
+\end{minipage}}
 \end{uncoverenv}
-\vspace{0.25 cm}
-\end{minipage}
-\vspace{5 cm}
+\vspace{6 cm}
 \end{frame}
 
-\begin{frame}{Everything is made out of histograms}
+\begin{frame}{It's all made out of histograms}
 \vspace{0.5 cm}
 \mbox{\hspace{-1.1 cm}
 \includegraphics[height=1.8cm]{dileptons_fig_01b_mumu.png}
@@ -421,7 +423,7 @@ API presumes the dataset is too big for a single function call.
 \vspace{0.5 cm}
 \begin{center}
 \begin{minipage}{0.9\linewidth}
-\Large Histograms are the basic unit of HEP data analysis, used to make almost everything else. Analogous to
+\Large Histogram containers are the basic unit of HEP data analysis, used to make just about everything else. Analogous to
 
 \vspace{0.5 cm}
 \hspace{0.5 cm}\begin{minipage}{0.5\linewidth}
@@ -515,11 +517,11 @@ x.plot()
 \small
 \begin{minted}{python}
 x = events.aggregate(
-    monoid_zero(),
+    emptyCounter(),
     lambda h, event:
-        monoid_successor(h, event),
+        incrementCounter(h, event),
     lambda h1, h2:
-        monoid_add(h1, h2))
+        addCounters(h1, h2))
 
 x.plot()
 \end{minted}
@@ -645,6 +647,8 @@ z.plot()
 
 \begin{frame}[fragile]{Solution: go functional}
 \vspace{0.5 cm}
+New constructor:
+
 \begin{center}
 \fbox{\begin{minipage}{0.85\linewidth}
 \vspace{0.25 cm}
@@ -657,7 +661,7 @@ where {\ttfamily\small\textbf{fillRule}} is a function : {\it data} $\to$ $\math
 
 \begin{uncoverenv}<2->
 \vspace{0.5 cm}
-All domain-specific knowledge is in the binning and the {\ttfamily\small\textbf{fillRule}}. The filling function may now be generic (and automated).
+All domain-specific knowledge is in the constructor. The filling function may now be generic (and automated).
 
 \begin{center}
 \fbox{\begin{minipage}{0.85\linewidth}
@@ -669,7 +673,7 @@ All domain-specific knowledge is in the binning and the {\ttfamily\small\textbf{
 \end{uncoverenv}
 
 \begin{uncoverenv}<3->
-\vspace{0.25 cm}
+\vspace{0.15 cm}
 (In a {\it purely} functional environment, {\ttfamily\small hnew = hold.filled(datum)}.)
 \end{uncoverenv}
 \end{frame}
@@ -703,7 +707,7 @@ x.plot()
 \begin{uncoverenv}<2->
 \small
 \begin{minted}{python}
-class Package:     # also in the library
+class Label:     # also in the library
   def __init__(self, **hs):
       self.hs = hs
   def fill(self, datum):
@@ -713,7 +717,7 @@ class Package:     # also in the library
       return {n: self.hs[n] + other.hs[n]
                         for n in self.hs}
 
-pkg = events.aggregate(Package(
+pkg = events.aggregate(Label(
         x = Histogram(100, -5.0, 5.0,
                 lambda ev: ev.calcX()),
         y = Histogram(100, -5.0, 5.0,
@@ -728,7 +732,7 @@ pkg.hs["x"].plot()
 
 \begin{frame}{}
 \begin{center}
-\Large This ``\textcolor{blue}{\ttfamily \textbf{Package}}'' has the same interface as a \textcolor{blue}{\ttfamily \textbf{Histogram}}, namely the \textcolor{blue}{\ttfamily \textbf{fill}} and \textcolor{blue}{\ttfamily \textbf{+}} methods.
+\Large This packaging with ``\textcolor{blue}{\ttfamily \textbf{Label}}'' has the same interface as a \textcolor{blue}{\ttfamily \textbf{Histogram}}, namely the \textcolor{blue}{\ttfamily \textbf{fill}} and \textcolor{blue}{\ttfamily \textbf{+}} methods.
 \end{center}
 \end{frame}
 
@@ -900,7 +904,7 @@ Now each bin in {\ttfamily\small x} contains
 \item<2-> a language-independent specification,
 \item<3-> several language versions (Python and Scala are the most complete),
 \item<4-> an interchangeable JSON format,
-\item<5-> multiple filling back-ends: ``normal,'' SparkSQL optimizations, Numpy optimizations, JIT-compilation, GPU (CUDA) code generation\ldots
+\item<5-> multiple filling back-ends (examples follow),
 \item<6-> no built-in plotting: Matplotlib, Bokeh, ROOT as front-ends.
 \end{itemize}
 \end{frame}
@@ -908,7 +912,7 @@ Now each bin in {\ttfamily\small x} contains
 \begin{frame}{User's perspective}
 \vspace{0.5 cm}
 \begin{center}
-\includegraphics[width=0.75\linewidth]{front-back-ends.pdf}
+\includegraphics[width=0.75\linewidth]{front-back-ends.pdf}\mbox{\hspace{2 cm}}
 \end{center}
 \end{frame}
 
@@ -1024,11 +1028,13 @@ The C++ implementation {\it will} be revised.
 \vspace{0.25 cm}
 \textcolor{darkblue}{\large Spark RDD: provide an opaque function}
 
-\begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
-implicit class DoublePow(x: Double) {
-  def **(power: Double) = Math.pow(x, power)
-}
-\end{lstlisting}
+%% \begin{uncoverenv}<2->
+%% \begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
+%% implicit class DoublePow(x: Double) {
+%%   def **(power: Double) = Math.pow(x, power)
+%% }
+%% \end{lstlisting}
+%% \end{uncoverenv}
 
 \vspace{-0.25 cm}
 \small
@@ -1041,17 +1047,19 @@ val h = rdd.aggregate(
 
 \textcolor{gray}{(Statically typed to function arguments, hidden by type inference.)}
 
-\vspace{0.1 cm}
-\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+%% \vspace{0.1 cm}
+%% \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
 
-\vspace{0.25 cm}
+\vspace{1.3 cm}
 \textcolor{darkblue}{\large SparkSQL: provide a transformation on columns}
 
-\begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
-implicit class ColumnPow(x: org.apache.spark.sql.Column) {
-  def **(power: Double) = org.apache.spark.sql.functions.pow(x, power)
-}
-\end{lstlisting}
+%% \begin{uncoverenv}<2->
+%% \begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
+%% implicit class ColumnPow(x: org.apache.spark.sql.Column) {
+%%   def **(power: Double) = org.apache.spark.sql.functions.pow(x, power)
+%% }
+%% \end{lstlisting}
+%% \end{uncoverenv}
 
 \vspace{-0.25 cm}
 \small
@@ -1075,10 +1083,10 @@ for mu in muons:
     h.fill(mu)
 \end{minted}
 
-\vspace{-0.35 cm}
-\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+%% \vspace{-0.35 cm}
+%% \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
 
-\vspace{0.15 cm}
+\vspace{0.25 cm}
 \textcolor{darkblue}{\large Numpy: provide a lambda or a quoted expression}
 
 \small
@@ -1139,41 +1147,57 @@ h.fill.pycuda(muons)    # evaluates with PyCUDA
 \end{frame}
 
 \begin{frame}{The unreasonable effectiveness of mathematics}
-\vspace{0.5 cm}
-\large
-I learned (along the way) that all aggregators must be:
+\vspace{0.3 cm}
+I learned (along the way) that all aggregators must
 
-\vspace{0.25 cm}
+\vspace{0.2 cm}
 \begin{uncoverenv}<2->
-\hspace{1 cm}{\bf Additive}
+\hspace{0.7 cm}{\bf be additive:}
 
-\vspace{0.1 cm}
-\hspace{1.5 cm}Independent of {\it whether} datasets are partitioned.
+\hspace{1.2 cm}independent of {\it whether} datasets are partitioned.
 
-\vspace{-0.25 cm}
-\[ \textcolor{darkblue}{\mbox{fill}(\mbox{data}_1 + \mbox{data}_2)} = \textcolor{darkblue}{\mbox{fill}(\mbox{data}_1) + \mbox{fill}(\mbox{data}_2)} = \textcolor{darkblue}{h_1 + h_2} \]
+\vspace{-0.3 cm}
+\[ \textcolor{darkblue}{\mbox{fill}(\mbox{data}_1 + \mbox{data}_2)} = \textcolor{darkblue}{\mbox{fill}(\mbox{data}_1) + \mbox{fill}(\mbox{data}_2)} \]
 \end{uncoverenv}
 
-\vspace{-0.2 cm}
+\vspace{-0.5 cm}
 \begin{uncoverenv}<3->
-\hspace{1 cm}{\bf Associative}
+\hspace{0.7 cm}{\bf be homogeneous in the weights:}
 
-\vspace{0.1 cm}
-\hspace{1.5 cm}Independent of {\it where} datasets get partitioned.
+\hspace{1.2 cm}fill weight 0.0 corresponds to no fill, 1.0 to simple fill, 2.0 to double-fill, \ldots
 
-\vspace{-0.25 cm}
+\vspace{-0.3 cm}
+\[ \textcolor{darkblue}{\mbox{fill}(\mbox{data}, \mbox{weight})} = \textcolor{darkblue}{\mbox{fill}(\mbox{data}) \cdot \mbox{weight}} \]
+\end{uncoverenv}
+
+\begin{uncoverenv}<4->
+\vspace{-4.0 cm}
+\hfill $\left\}\mbox{\rotatebox{90}{\hspace{-0.3 cm}linear\hspace{1.3 cm}}\hspace{0.15 cm}}\right.$ \hspace{-0.9 cm}
+\end{uncoverenv}
+
+\vspace{0.3 cm}
+\begin{uncoverenv}<5->
+\hspace{0.7 cm}{\bf be associative:}
+
+\hspace{1.2 cm}independent of {\it where} datasets get partitioned.
+
+\vspace{-0.3 cm}
 \[ \textcolor{darkblue}{(h_1 + h_2) + h_3} = \textcolor{darkblue}{h_1 + (h_2 + h_3)} \]
 \end{uncoverenv}
 
-\vspace{-0.2 cm}
-\begin{uncoverenv}<4->
-\hspace{1 cm}{\bf Commutative}
+\vspace{-0.7 cm}
+\begin{uncoverenv}<6->
+\hspace{0.7 cm}{\bf have an identity:}
 
-\vspace{0.1 cm}
-\hspace{1.5 cm}Independent of {\it order} of combining parts. \textcolor{gray}{\normalsize (Not essential, but convenient.)}
+\hspace{1.2 cm}for both the \textcolor{darkblue}{fill} and \textcolor{darkblue}{$+$} methods.
 
-\vspace{-0.25 cm}
-\[ \textcolor{darkblue}{h_1 + h_2} = \textcolor{darkblue}{h_2 + h_1} \]
+\vspace{-0.3 cm}
+\[ \textcolor{darkblue}{h + 0} = \textcolor{darkblue}{h}\mbox{, } \textcolor{darkblue}{0 + h} = \textcolor{darkblue}{h}\mbox{, } \textcolor{darkblue}{\mbox{fill}(\mbox{data}, 0)} = \textcolor{darkblue}{0} \]
+\end{uncoverenv}
+
+\begin{uncoverenv}<7->
+\vspace{-3.9 cm}
+\hfill $\left\}\mbox{\rotatebox{90}{\hspace{-0.5 cm}monoid\hspace{1.1 cm}}\hspace{0.15 cm}}\right.$ \hspace{-0.9 cm}
 \end{uncoverenv}
 \end{frame}
 
@@ -1195,7 +1219,7 @@ I learned (along the way) that all aggregators must be:
 \scriptsize Ben-Haim and Tom-Tov, \href{http://www.jmlr.org/papers/volume11/ben-haim10a/ben-haim10a.pdf}{\textcolor{blue}{``A streaming parallel decision tree algorithm''}} {\it J. Machine Learning Research 11 (2010).}
 \end{minipage}
 
-\item[Problem:] result of {\ttfamily\small\textbf{fill}} depends on history of data seen; not additive or associative.
+\item[Problem:] result of {\ttfamily\small\textbf{fill}} depends on history of data seen; not a linear monoid.
 \end{description}
 
 \begin{center}
@@ -1213,7 +1237,7 @@ I learned (along the way) that all aggregators must be:
 
 \item[Tried:] incrementally minimize mean absolute error from target quantile.
 
-\item[Problem:] result of {\ttfamily\small\textbf{fill}} depends on history of data seen; not additive or associative.
+\item[Problem:] result of {\ttfamily\small\textbf{fill}} depends on history of data seen; not a linear monoid.
 
 \mbox{ }
 \end{description}
