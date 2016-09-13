@@ -189,7 +189,7 @@
 \column{0.4\linewidth}
 \begin{uncoverenv}<4->
 \begin{itemize}
-\item Individual physicists and projects like DIANA-HEP \\ (my job) are starting to explore and develop these connections.
+\item Individual physicists and projects like DIANA-HEP \\ (my employer) are starting to explore and develop these connections.
 \end{itemize}
 \end{uncoverenv}
 
@@ -657,7 +657,7 @@ New constructor:
 \end{minipage}}
 \end{center}
 
-where {\ttfamily\small\textbf{fillRule}} is a function : {\it data} $\to$ $\mathbb{R}$ that specifies how to get the binnable feature from the input dataset.
+where {\ttfamily\small\textbf{fillRule}} is a function : {\it data} $\to$ $\mathbb{R}$ that determines which bin an element of {\it data} increments.
 
 \begin{uncoverenv}<2->
 \vspace{0.5 cm}
@@ -887,7 +887,7 @@ Now each bin in {\ttfamily\small x} contains
 {\normalsize to make stacked histograms.}
 
 \vspace{0.75 cm}
-{\normalsize Guarantees that the numerator/denominator or the stacked items have \mbox{consistent} binning for the bin-by-bin division or sum.}
+{\normalsize Guarantees that the bins align in the numerator/denominator or stacked items, so they can be correctly divided or added together.}
 \end{minipage}
 \end{center}
 \end{frame}
@@ -1141,8 +1141,14 @@ h.fill.pycuda(muons)    # evaluates with PyCUDA
 \large
 \begin{itemize}
 \item<2-> Not intended as an accelerator (due to cost of sending data to GPU).
-\item<3-> Intended as a convenience for developing GPU algorithms: the generated kernels are meant to be incorporated into other GPU projects so that those developers can see what they're doing.
-\item<4-> Data reduction (even a simple counter) is tricky on a GPU. Histogrammar generates a function that outputs JSON, to be plotted externally.
+\item<3-> Intended as a convenience for GPU algorithm developers.
+\item<4-> Histogrammar generates a
+\begin{itemize}
+\item {\tt \_\_device\_\_ fill} function that can be called by GPU code,
+\item {\tt \_\_global\_\_ combine} function that merges partial results,
+\item {\tt \_\_host\_\_ toJson} function for plotting (e.g.\ in Python),
+\end{itemize}
+to help GPU developers visualize intermediate quantities for debugging.
 \end{itemize}
 \end{frame}
 
