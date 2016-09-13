@@ -165,15 +165,14 @@
 \end{itemize}
 
 \vspace{0.2 cm}
-\hfill \only<5>{\includegraphics[width=0.87\linewidth]{tapes1.png}}\only<6>{\includegraphics[width=0.87\linewidth]{cerncomputing.png}}
+\hfill \only<1-2>{\includegraphics[width=0.87\linewidth]{blank.png}}\only<3>{\includegraphics[width=0.87\linewidth]{tapes1.png}}\only<4>{\includegraphics[width=0.87\linewidth]{cerncomputing.png}}
 \vspace{-0.2 cm}
 \end{columns}
 \end{frame}
 
 \begin{frame}{}
 \begin{center}
-\Large This community has traditionally been isolated; \\
-the problems viewed as unique.
+\Large For decades, HEP seemed to be the only field with these problems.
 
 \vspace{0.5 cm}
 \uncover<2->{That is no longer true.}
@@ -506,6 +505,38 @@ x.plot()
 \small
 \begin{minted}{python}
 x = events.aggregate(
+    monoid_zero(),
+    lambda h, event:
+        monoid_successor(h, event),
+    lambda h1, h2:
+        monoid_add(h1, h2))
+
+x.plot()
+\end{minted}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Specifically, in Spark\ldots}
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.5\linewidth}
+
+\textcolor{darkblue}{Imperative analysis script}
+\small
+\begin{minted}{python}
+x = Histogram(100, -5.0, 5.0)
+
+for event in events:
+    x.fill(event.calcX())
+
+x.plot()
+\end{minted}
+
+\column{0.52\linewidth}
+\textcolor{darkblue}{Spark equivalent}
+\small
+\begin{minted}{python}
+x = events.aggregate(
     Histogram(100, -5.0, 5.0),
     lambda h, event:
         h.fill(event.calcX()),
@@ -543,12 +574,12 @@ y.plot()
 x, y = events.aggregate(
     (Histogram(100, -5.0, 5.0),
      Histogram(100, -5.0, 5.0)),
-    lambda h, event: (
-        h[0].fill(event.calcX()),
-        h[1].fill(event.calcY())),
-    lambda h1, h2: (
-        h1[0] + h2[0],
-        h1[1] + h2[1]))
+    lambda hs, event: (
+        hs[0].fill(event.calcX()),
+        hs[1].fill(event.calcY())),
+    lambda hs1, hs2: (
+        hs1[0] + hs2[0],
+        hs1[1] + hs2[1]))
 
 x.plot()
 y.plot()
@@ -586,14 +617,14 @@ x, y, z = events.aggregate(
     (Histogram(100, -5.0, 5.0),
      Histogram(100, -5.0, 5.0),
      Histogram(100, -5.0, 5.0)),
-    lambda h, event: (
-        h[0].fill(event.calcX()),
-        h[1].fill(event.calcY()),
-        h[2].fill(event.calcZ())),
-    lambda h1, h2: (
-        h1[0] + h2[0],
-        h1[1] + h2[1],
-        h1[2] + h2[2]))
+    lambda hs, event: (
+        hs[0].fill(event.calcX()),
+        hs[1].fill(event.calcY()),
+        hs[2].fill(event.calcZ())),
+    lambda hs1, hs2: (
+        hs1[0] + hs2[0],
+        hs1[1] + hs2[1],
+        hs1[2] + hs2[2]))
 
 x.plot()
 y.plot()
@@ -980,7 +1011,7 @@ The C++ implementation {\it will} be revised.
 \end{frame}
 
 \begin{frame}[fragile]{Spark RDD and DataFrame back-ends}
-\vspace{0.5 cm}
+\vspace{0.25 cm}
 \textcolor{darkblue}{\large Spark RDD: provide an opaque function}
 
 \begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
@@ -1000,7 +1031,10 @@ val h = rdd.aggregate(
 
 \textcolor{gray}{(Statically typed to function arguments, hidden by type inference.)}
 
-\vspace{0.5 cm}
+\vspace{0.1 cm}
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+\vspace{0.25 cm}
 \textcolor{darkblue}{\large SparkSQL: provide a transformation on columns}
 
 \begin{lstlisting}[basicstyle=\ttfamily\scriptsize\color{gray}]
@@ -1031,7 +1065,10 @@ for mu in muons:
     h.fill(mu)
 \end{minted}
 
-\vspace{0.25 cm}
+\vspace{-0.35 cm}
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+\vspace{0.15 cm}
 \textcolor{darkblue}{\large Numpy: provide a lambda or a quoted expression}
 
 \small
