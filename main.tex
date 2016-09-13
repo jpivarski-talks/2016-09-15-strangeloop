@@ -353,12 +353,12 @@ histogram(X, nbins)
 \end{frame}
 
 \begin{frame}[fragile]{HEP histograms are different}
+\vspace{0.5 cm}
 HEP software (HBOOK, PAW, ROOT, HippoDraw, AIDA, \ldots) treats histograms as {\it fillable containers.}
 
 \begin{center}
 \fbox{\begin{minipage}{0.6\linewidth}
 \vspace{0.3 cm}
-\begin{onlyenv}<1>
 \vspace{0.5\baselineskip}
 \hfill \begin{minipage}{0.9\linewidth}
 \ttfamily\small
@@ -371,7 +371,6 @@ for x in data: \\
 h.plot()
 \end{minipage}
 \vspace{0.5\baselineskip}
-\end{onlyenv}
 %% \begin{onlyenv}<2->
 %% \hfill \begin{minipage}{0.9\linewidth}
 %% \ttfamily\small
@@ -394,7 +393,18 @@ API presumes the dataset is too big for a single function call.
 \vspace{0.25 cm}
 {\it Intrinsically} single-pass (implementation can't pre-scan to set bin width or range).
 
-\vspace{-0.5 cm}
+\vspace{-5 cm}
+\hfill \begin{minipage}{0.17\linewidth}
+\vspace{0.25 cm}
+\scriptsize
+\begin{uncoverenv}<2->
+\includegraphics[width=\linewidth]{hbook.png}
+
+{\centering (HBOOK is 43 year old software.)}
+\end{uncoverenv}
+\vspace{0.25 cm}
+\end{minipage}
+\vspace{5 cm}
 \end{frame}
 
 \begin{frame}{Everything is made out of histograms}
