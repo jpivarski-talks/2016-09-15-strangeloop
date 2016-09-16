@@ -647,7 +647,7 @@ z.plot()
 
 \begin{frame}[fragile]{Solution: go functional}
 \vspace{0.5 cm}
-New constructor:
+Make the constructor a higher-order function:
 
 \begin{center}
 \fbox{\begin{minipage}{0.85\linewidth}
@@ -674,7 +674,7 @@ All domain-specific knowledge is in the constructor. The filling function may no
 
 \begin{uncoverenv}<3->
 \vspace{0.15 cm}
-(In a {\it purely} functional environment, {\ttfamily\small hnew = hold.filled(datum)}.)
+(In a {\it purely} functional environment, {\ttfamily\small newh = oldh.filled(datum)}.)
 \end{uncoverenv}
 \end{frame}
 
@@ -1198,7 +1198,7 @@ I learned (along the way) that all aggregators must
 \hspace{1.2 cm}for both the \textcolor{darkblue}{fill} and \textcolor{darkblue}{$+$} methods.
 
 \vspace{-0.3 cm}
-\[ \textcolor{darkblue}{h + 0} = \textcolor{darkblue}{h}\mbox{, } \textcolor{darkblue}{0 + h} = \textcolor{darkblue}{h}\mbox{, } \textcolor{darkblue}{\mbox{fill}(\mbox{data}, 0)} = \textcolor{darkblue}{0} \]
+\[ \textcolor{darkblue}{h + 0} = \textcolor{darkblue}{h}\mbox{,\hspace{0.5 cm}} \textcolor{darkblue}{0 + h} = \textcolor{darkblue}{h}\mbox{,\hspace{0.5 cm}} \textcolor{darkblue}{\mbox{fill}(\mbox{data}, 0)} = \textcolor{darkblue}{0} \]
 \end{uncoverenv}
 
 \begin{uncoverenv}<7->
@@ -1282,7 +1282,7 @@ I learned (along the way) that all aggregators must
 \item implement cache-aware JIT on the JVM?
 \item design a modern C++ implementation ``the right way?''
 \item integrate Histogrammar into R's data.frames or ggplot2?
-\item develop a Javascript d3 front-end, thereby connecting Spark or GPUs to the web?
+\item implement Histogrammar in Javascript for a d3 front-end, thereby connecting Spark or GPUs to the web?
 \end{itemize}
 \end{minipage}
 \end{center}

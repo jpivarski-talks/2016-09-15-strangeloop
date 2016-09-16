@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -39,8 +39,8 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="677"
-     inkscape:window-height="715"
+     inkscape:window-width="1233"
+     inkscape:window-height="1027"
      id="namedview4"
      showgrid="false"
      fit-margin-top="5"
@@ -48,16 +48,16 @@
      fit-margin-right="5"
      fit-margin-bottom="5"
      inkscape:zoom="0.31978319"
-     inkscape:cx="826.32035"
+     inkscape:cx="576.15085"
      inkscape:cy="330.1903"
-     inkscape:window-x="683"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2" />
   <image
      width="600"
      height="738"
-     xlink:href="file:///var/host/media/removable/SDCARD/talks/2016-09-15-strangeloop/octopus.png"
+     xlink:href="file:///home/pivarski/talks/2016-09-15-strangeloop/octopus.png"
      id="image10"
      x="-1082.9752"
      y="-819.23596"
@@ -77,17 +77,21 @@
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
      x="398.94934"
-     y="147.0291"
+     y="146.25761"
      id="text2991"
      sodipodi:linespacing="105%"><tspan
        sodipodi:role="line"
-       id="tspan2993"
        x="398.94934"
-       y="147.0291">SQL/NoSQL</tspan><tspan
+       y="146.25761"
+       id="tspan2995">MongoDB's</tspan><tspan
        sodipodi:role="line"
        x="398.94934"
-       y="189.0291"
-       id="tspan2995">databases</tspan></text>
+       y="188.25761"
+       id="tspan3015">Javascript</tspan><tspan
+       sodipodi:role="line"
+       x="398.94934"
+       y="230.25761"
+       id="tspan3017">map-reduce</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
@@ -98,7 +102,11 @@
        sodipodi:role="line"
        id="tspan2999"
        x="339.24677"
-       y="332.77045">TensorFlow</tspan></text>
+       y="332.77045">TensorFlow,</tspan><tspan
+       sodipodi:role="line"
+       x="339.24677"
+       y="374.77045"
+       id="tspan3019">Keras, Theano</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
@@ -107,17 +115,14 @@
      id="text3001"
      sodipodi:linespacing="105%"><tspan
        sodipodi:role="line"
-       id="tspan3003"
        x="308.28986"
-       y="529.56787">awk-like</tspan><tspan
-       sodipodi:role="line"
-       x="308.28986"
-       y="571.56787"
+       y="529.56787"
        id="tspan3022">UNIX command</tspan><tspan
        sodipodi:role="line"
        x="308.28986"
-       y="613.56787"
-       id="tspan3005">line tool</tspan></text>
+       y="571.56787"
+       id="tspan3023"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:Sans">line tool:</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
@@ -132,22 +137,26 @@
        sodipodi:role="line"
        x="308.28986"
        y="810.37817"
-       id="tspan3011">(Storm, etc.)</tspan></text>
+       id="tspan3011">(Storm, S4, etc.)</tspan></text>
   <text
      sodipodi:linespacing="105%"
      id="text3015"
      y="147.0291"
-     x="1198.3088"
+     x="1218.3088"
      style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:104.99999523%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:Sans"
      xml:space="preserve"><tspan
        y="147.0291"
-       x="1198.3088"
+       x="1218.3088"
        sodipodi:role="line"
        id="tspan3039">Binary format</tspan><tspan
        y="189.0291"
-       x="1198.3088"
+       x="1218.3088"
        sodipodi:role="line"
-       id="tspan3051">(supplementing JSON)</tspan></text>
+       id="tspan3054">with a schema</tspan><tspan
+       y="231.0291"
+       x="1218.3088"
+       sodipodi:role="line"
+       id="tspan3051">(alternative to JSON)</tspan></text>
   <text
      sodipodi:linespacing="105%"
      id="text3021"
@@ -181,7 +190,7 @@
        y="613.56787"
        x="1291.566"
        sodipodi:role="line"
-       id="tspan3018">as data arrive</tspan></text>
+       id="tspan3021">as data arrive</tspan></text>
   <text
      sodipodi:linespacing="105%"
      id="text3031"
@@ -219,4 +228,16 @@
        x="1326.3422"
        id="tspan3061"
        sodipodi:role="line">More front-end ideas...</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="151.6297"
+     y="625.00714"
+     id="text3027"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan3029"
+       x="151.6297"
+       y="625.00714"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#008000;font-family:Droid Sans Mono;-inkscape-font-specification:Droid Sans Mono">awk data | hg</tspan></text>
 </svg>
